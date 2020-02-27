@@ -40,14 +40,15 @@ class FakePostJob implements ShouldQueue
         
         try {
 
-            $client = New Client(['http_errors' => false]);
+            $client = new Client(['http_errors' => false]);
             $response  = $client->request('POST', config('app.fake_post_url'));
             $code = $response->getStatusCode();
             
-            if($code === 200)
+            if($code === 200){
                 Log::debug('Request successfully');
-            else
+            }else{
                 log::debug(new Exception('The request can not be processed. Error code: '.$code));
+            }
             
         } catch (\Throwable $th) {
             throw $th;
